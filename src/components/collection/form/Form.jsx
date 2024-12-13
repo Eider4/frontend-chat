@@ -15,7 +15,7 @@ const Form = ({ onSubmit, register, userVetification }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     const Ture = userVetification(formData.name);
@@ -68,18 +68,17 @@ const Form = ({ onSubmit, register, userVetification }) => {
               name="contraseña"
               value={formData.contraseña}
               onChange={handleChange}
-              required
             />
-            <button
-              type="button"
-              className={styles.eyeButton}
+            <span
+              className={styles.eyeIcon}
               onClick={togglePasswordVisibility}
               aria-label="Toggle password visibility"
             >
               {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-            </button>
+            </span>
           </div>
         </div>
+
         <button type="submit" className={styles.submitButton}>
           Registrarse
         </button>
