@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const crearUsuario = async (userData) => {
+const createUser = async (userData) => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
@@ -28,4 +28,4 @@ const crearUsuario = async (userData) => {
   return { successMessage, error };
 };
 
-export default crearUsuario;
+export default createUser;
