@@ -5,7 +5,7 @@ import Form from "../../components/collection/form/Form";
 export default function RegisterPage() {
   return (
     <div>
-      <Form />
+      <Form register={true} userVetification={() => "true"} />
     </div>
   );
 }

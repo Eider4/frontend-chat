@@ -1,30 +1,40 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "./form.module.css";
+import { createUser } from "../../../pages/register/services/createUser";
+import { verifyUser } from "../../../pages/register/services/verifyUser";
 
-const Form = ({ onSubmit, register, userVetification }) => {
+const Form = ({ register }) => {
   const [formData, setFormData] = useState({
-    nombre: "",
-    correo: "",
-    contraseña: "",
+    name: "",
+    email: "",
+    password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
-
+  const [nameExisting, setNameExisting] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const Ture = userVetification(formData.name);
-    if (!Ture) {
-      console.log("Datos enviados:", formData);
-      if (onSubmit) onSubmit();
-    } else {
-      console.log(`El usuario ${nombreUsuario} no existe.`);
-    }
+    if (register) {
+      const Ture = await verifyUser(formData.name, formData.email);
+      if (Ture.name && Ture.email) {
+        return setNameExisting("el email y el nombre ya existe");
+      } else {
+        if (Ture.name)
+          return setNameExisting(`El nombre ${formData.name} ya existe.`);
+        if (Ture.email)
+          return setNameExisting(`El email ${formData.email} ya existe.`);
+        setNameExisting("Datos enviados");
+        const data = await createUser(formData);
+        console.log(data);
+        return;
+      }
+    } else loginUSer(formData);
   };
 
   const togglePasswordVisibility = () => {
@@ -38,35 +48,35 @@ const Form = ({ onSubmit, register, userVetification }) => {
           {register ? "Registar" : "Iniciar sesion"}
         </h2>
         <div className={styles.inputGroup}>
-          <label htmlFor="nombre">Nombre</label>
+          <label htmlFor="name">name</label>
           <input
             type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="correo">Correo Electronico</label>
+          <label htmlFor="email">email Electronico</label>
           <input
             type="email"
-            id="correo"
-            name="correo"
-            value={formData.correo}
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="contraseña">Contraseña</label>
+          <label htmlFor="password">password</label>
           <div className={styles.passwordWrapper}>
             <input
               type={showPassword ? "text" : "password"}
-              id="contraseña"
-              name="contraseña"
-              value={formData.contraseña}
+              id="password"
+              name="password"
+              value={formData.password}
               onChange={handleChange}
             />
             <span
@@ -78,7 +88,7 @@ const Form = ({ onSubmit, register, userVetification }) => {
             </span>
           </div>
         </div>
-
+        {nameExisting && <p>{nameExisting}</p>}
         <button type="submit" className={styles.submitButton}>
           Registrarse
         </button>

@@ -1,0 +1,125 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+
+    & p {
+        margin: 0 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        font-family: Arial, Helvetica, sans-serif;
+
+        &:hover {
+            color: #007bff;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.input {
+    width: 300px;
+    height: 40px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.2rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+        border: 1px solid #007bff;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &::placeholder {
+        color: #ccc;
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:focus::placeholder {
+        color: #007bff;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:hover::placeholder {
+        color: #007bff95;
+        transition: all 0.3s ease-in-out;
+    }
+
+}
+
+.button {
+    width: 100px;
+    height: 40px;
+    border-radius: 0 5px 5px 0;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.friendsContainer {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.friend_name {
+    font-size: 1.5rem;
+}
+
+.friend_email {
+    font-size: 1rem;
+}
+
+.button_send {
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 15px;
+}
