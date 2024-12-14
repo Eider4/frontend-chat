@@ -15,7 +15,7 @@ const Form = ({ onSubmit, register, userVetification }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const Ture = userVetification(formData.name);
