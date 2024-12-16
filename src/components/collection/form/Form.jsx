@@ -2,29 +2,34 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "./form.module.css";
 
-const Form = ({ onSubmit, register, userVetification }) => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    correo: "",
-    contraseña: "",
-  });
-
+const Form = ({
+  fields, // Lista de campos dinámicos
+  title, // Título del formulario
+  buttonText, // Texto del botón
+  onSubmit, // Función al enviar el formulario
+  customValidation, // Validaciones personalizadas
+  showPasswordToggle, // Mostrar/ocultar contraseña
+}) => {
+  const [formData, setFormData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
+  // Manejar cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
- 
+
+  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    const Ture = userVetification(formData.name);
-    if (!Ture) {
-      console.log("Datos enviados:", formData);
-      if (onSubmit) onSubmit();
-    } else {
-      console.log(`El usuario ${nombreUsuario} no existe.`);
+    if (customValidation) {
+      const errors = customValidation(formData);
+      if (errors.length > 0) {
+        console.error("Errores de validación:", errors);
+        return;
+      }
     }
+    if (onSubmit) onSubmit(formData);
   };
 
   const togglePasswordVisibility = () => {
@@ -34,53 +39,46 @@ const Form = ({ onSubmit, register, userVetification }) => {
   return (
     <div className={styles.formContainer}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.title}>
-          {register ? "Registar" : "Iniciar sesion"}
-        </h2>
-        <div className={styles.inputGroup}>
-          <label htmlFor="nombre">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="correo">Correo Electronico</label>
-          <input
-            type="email"
-            id="correo"
-            name="correo"
-            value={formData.correo}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="contraseña">Contraseña</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="contraseña"
-              name="contraseña"
-              value={formData.contraseña}
-              onChange={handleChange}
-            />
-            <span
-              className={styles.eyeIcon}
-              onClick={togglePasswordVisibility}
-              aria-label="Toggle password visibility"
-            >
-              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-            </span>
+        <h2 className={styles.title}>{title}</h2>
+
+        {fields.map((field) => (
+          <div className={styles.inputGroup} key={field.name}>
+            <label htmlFor={field.name}>{field.label}</label>
+            {field.type === "password" && showPasswordToggle ? (
+              <div className={styles.passwordWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name] || ""}
+                  onChange={handleChange}
+                  placeholder={field.placeholder || ""}
+                  required={field.required}
+                />
+                <span
+                  className={styles.eyeIcon}
+                  onClick={togglePasswordVisibility}
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </span>
+              </div>
+            ) : (
+              <input
+                type={field.type}
+                id={field.name}
+                name={field.name}
+                value={formData[field.name] || ""}
+                onChange={handleChange}
+                placeholder={field.placeholder || ""}
+                required={field.required}
+              />
+            )}
           </div>
-        </div>
+        ))}
 
         <button type="submit" className={styles.submitButton}>
-          Registrarse
+          {buttonText}
         </button>
       </form>
     </div>
