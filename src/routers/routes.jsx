@@ -8,6 +8,7 @@ const routes = () => {
     <Routes>
       <Route path="/form" element={<Form />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<Register />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/notification" element={<Notification />} />
