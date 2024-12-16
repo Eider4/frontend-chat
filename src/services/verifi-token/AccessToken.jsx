@@ -16,7 +16,7 @@ const AccessToken = () => {
         }
 
         // Envía el token al backend
-        const response = await axios.post('https://tu-backend.com/api/verify-token', {
+        const response = await axios.post('http://localhost:5173/', {
           token,
         });
 
