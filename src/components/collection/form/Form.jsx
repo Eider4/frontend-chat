@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "./form.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({
-  fields, // Lista de campos dinámicos
-  title, // Título del formulario
-  buttonText, // Texto del botón
-  onSubmit, // Función al enviar el formulario
-  customValidation, // Validaciones personalizadas
-  showPasswordToggle, // Mostrar/ocultar contraseña
+  fields, 
+  title, 
+  buttonText, 
+  onSubmit, 
+  customValidation, 
+  showPasswordToggle,
 }) => {
   const [formData, setFormData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     if (customValidation) {
@@ -80,7 +80,21 @@ const Form = ({
         <button type="submit" className={styles.submitButton}>
           {buttonText}
         </button>
+      <p style={{ textAlign: "center" }}>
+        ¿No tienes una cuenta aún?{" "}
+        <span
+          style={{
+            color: "blue",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+          onClick={() => navigate("/form")} 
+        >
+          Regístrate aquí
+        </span>
+      </p>
       </form>
+
     </div>
   );
 };
