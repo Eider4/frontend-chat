@@ -8,7 +8,7 @@
 }
 
 .form {
-  width: 100%;
+ 
   max-width: 400px;
   background: white;
   border-radius: 8px;
@@ -59,16 +59,17 @@
 .eyeIcon {
   top: 1px;
   position: absolute;
-  right: 42px; 
+ left: 290px;
   cursor: pointer;
   font-size: 23px; 
 }
 
 
-
 .submitButton {
-  width: 300px;
-  padding: 7px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
   background-color: #4caf50;
   color: white;
   border: none;
