@@ -1,13 +1,14 @@
 import { apiUrl } from "../../../config/config";
 
-const SearchFriends = async (name, uid) => {
+const loginUser = async (formData) => {
   try {
-    const response = await fetch(`${apiUrl}/user/friends/search`, {
+    const response = await fetch(`${apiUrl}/user/login`, {
       method: "POST",
-      body: JSON.stringify({ name, uid }),
+      body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include", // Esto asegura que las cookies se envíen o guarden
     });
     const data = await response.json();
     return data;
@@ -16,4 +17,4 @@ const SearchFriends = async (name, uid) => {
   }
 };
 
-export default SearchFriends;
+export default loginUser;

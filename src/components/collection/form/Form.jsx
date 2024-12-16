@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "./form.module.css";
 import { createUser } from "../../../pages/register/services/createUser";
 import { verifyUser } from "../../../pages/register/services/verifyUser";
+import { useNavigate } from "react-router-dom";
+import loginUser from "../../../pages/login/services/loginUser";
+import { userContext } from "../../../context/user-context/UserContext";
+import { use } from "react";
 
 const Form = ({ register }) => {
   const [formData, setFormData] = useState({
@@ -17,7 +21,7 @@ const Form = ({ register }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const { user } = useContext(userContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (register) {
@@ -31,33 +35,37 @@ const Form = ({ register }) => {
           return setNameExisting(`El email ${formData.email} ya existe.`);
         setNameExisting("Datos enviados");
         const data = await createUser(formData);
-        console.log(data);
         return;
       }
-    } else loginUSer(formData);
+    } else loginUser(formData);
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
   return (
     <div className={styles.formContainer}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.title}>
           {register ? "Registar" : "Iniciar sesion"}
         </h2>
-        <div className={styles.inputGroup}>
-          <label htmlFor="name">name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {register && (
+          <div className={styles.inputGroup}>
+            <label htmlFor="name">name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        )}
         <div className={styles.inputGroup}>
           <label htmlFor="email">email Electronico</label>
           <input
@@ -92,6 +100,26 @@ const Form = ({ register }) => {
         <button type="submit" className={styles.submitButton}>
           Registrarse
         </button>
+        <p>
+          {register ? (
+            <>
+              ya tengo una cuenta ingresa{" "}
+              <span className={styles.link} onClick={() => navigate("/login")}>
+                aqui
+              </span>
+            </>
+          ) : (
+            <>
+              no tengo una cuenta, cree una{" "}
+              <span
+                className={styles.link}
+                onClick={() => navigate("/register")}
+              >
+                aqui
+              </span>
+            </>
+          )}
+        </p>
       </form>
     </div>
   );

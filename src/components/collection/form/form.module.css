@@ -35,8 +35,8 @@
 }
 
 .inputGroup input {
-    display: flex;
-      align-items: center;
+  display: flex;
+  align-items: center;
   position: relative;
   width: 300px;
   padding: 7px;
@@ -59,9 +59,9 @@
 .eyeIcon {
   top: 1px;
   position: absolute;
-  right: 42px; 
+  right: 42px;
   cursor: pointer;
-  font-size: 23px; 
+  font-size: 23px;
 }
 
 
@@ -99,4 +99,9 @@
   .submitButton {
     font-size: 0.9rem;
   }
+}
+
+.link {
+  color: #007bff;
+  cursor: pointer;
 }

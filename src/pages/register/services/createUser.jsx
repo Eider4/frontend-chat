@@ -10,6 +10,7 @@ export const createUser = async (userData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
+      credentials: "include", // Esto asegura que las cookies se envíen o guarden
     });
     const data = await response.json();
     return data;

@@ -1,10 +1,10 @@
 import { apiUrl } from "../../../config/config";
 
-const SearchFriends = async (name, uid) => {
+const SendRequestDelete = async (uid) => {
   try {
-    const response = await fetch(`${apiUrl}/user/friends/search`, {
+    const response = await fetch(`${apiUrl}/friends/delete`, {
       method: "POST",
-      body: JSON.stringify({ name, uid }),
+      body: JSON.stringify({ uid }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -16,4 +16,4 @@ const SearchFriends = async (name, uid) => {
   }
 };
 
-export default SearchFriends;
+export default SendRequestDelete;

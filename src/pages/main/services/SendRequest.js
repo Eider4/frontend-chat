@@ -1,10 +1,13 @@
 import { apiUrl } from "../../../config/config";
 
-const SendRequest = async (friendId) => {
+const SendRequest = async (userRejects, userSend) => {
   try {
-    const response = await fetch(`${apiUrl}/user/friends/request`, {
+    const response = await fetch(`${apiUrl}/friends/request`, {
       method: "POST",
-      body: JSON.stringify({ friendId }),
+      body: JSON.stringify({
+        userSend,
+        userRejects,
+      }),
       headers: {
         "Content-Type": "application/json",
       },

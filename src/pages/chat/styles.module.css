@@ -1,0 +1,115 @@
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.user_name {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.user_email {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #777;
+}
+
+.message_Container_and_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.form_message {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.input_input_message {
+    flex: 1;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+    resize: none;
+}
+
+.input_input_message:focus {
+    border-color: #007bff;
+}
+
+.button_send {
+    width: 100px;
+    height: 74px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.button_send:hover {
+    background-color: #0056b3;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 10px;
+    background-color: #eef9f5;
+}
+
+.message {
+    display: flex;
+    width: 100%;
+}
+
+.message_prymary {
+    align-self: flex-end;
+    background-color: #cea8f2;
+    color: #2d2d2d;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 60%;
+}
+
+.message_secondary {
+    align-self: flex-start;
+    background-color: #93c1ec;
+    color: #2d2d2d;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 60%;
+}
+
+.message_text {
+    margin-bottom: 5px;
+    width: 300px;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.message_date {
+    font-size: 0.8rem;
+    text-align: right;
+    color: #666;
+}
