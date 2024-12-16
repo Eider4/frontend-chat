@@ -1,11 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter, Routes } from 'react-router-dom';
 import './index.css'
-import Form from './components/collection/form/Form';
+import RoutesConfig from './routers/routes';
 
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Form />
+    <BrowserRouter>
+      <RoutesConfig/> {/* Usarás las rutas definidas en routes.js */}
+    </BrowserRouter>
   </StrictMode>
 );
